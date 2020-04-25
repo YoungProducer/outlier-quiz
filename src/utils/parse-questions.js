@@ -15,11 +15,8 @@ function parseQuestions (questions) {
             Object
               .entries(value)
               .reduce(function (subacc, [subkey, subvalue]) {
-                return {
-                  ...subacc,
-                  [subkey]: decodeURIComponent(subvalue)
-                }
-              })
+                return [...subacc, decodeURIComponent(subvalue)]
+              }, [])
 
           return {
             ...acc,
