@@ -6,11 +6,13 @@ module.exports = parseQuestions
  * via 'decodeURIComponent';
  */
 function parseQuestions (questions) {
-  questions.map(question =>
-    question.reduce(function (acc, [key, value]) {
-      return {
-        ...acc,
-        [key]: decodeURIComponent(value)
-      }
-    }, {}))
+  return questions.map(question =>
+    Object
+      .entries(question)
+      .reduce(function (acc, [key, value]) {
+        return {
+          ...acc,
+          [key]: decodeURIComponent(value)
+        }
+      }, {}))
 }
