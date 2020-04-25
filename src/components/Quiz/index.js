@@ -2,6 +2,7 @@ const React = require('react')
 
 const AnswersBlock = require('./Answers')
 const TopProgressBar = require('./TopProgressBar')
+const BottomProgressBar = require('./BottomProgressBar')
 const parseQuestions = require('../../utils/parse-questions')
 const toPercents = require('../../utils/to-percents')
 const questions = parseQuestions(require('../../questions.json'))
@@ -68,6 +69,13 @@ function Quiz () {
           incorrect={currentAnswer.incorrect_answers}
           nextQuestion={nextQuestion}
           increaseAmountOfRightAnswers={increaseAmountOfRightAnswers}
+        />
+        <BottomProgressBar
+          currentScore={toPercents(amountOfRightAnswers, currentAnswerIndex)}
+          maxScore={toPercents(
+            amountOfRightAnswers + questions.length - currentAnswerIndex,
+            questions.length
+          )}
         />
       </div>
     </div>
