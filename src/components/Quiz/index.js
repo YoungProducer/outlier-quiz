@@ -19,7 +19,7 @@ const diffLevels = {
 }
 
 function Quiz () {
-  const [currentAnswerIndex, setCurrentAnswerIndex] = React.useState(19)
+  const [currentAnswerIndex, setCurrentAnswerIndex] = React.useState(1)
   const [amountOfRightAnswers, setAmountOfRightAnswers] = React.useState(0)
   const [isFinished, setIsFinished] = React.useState(false)
 
