@@ -1,13 +1,20 @@
 .wrapper {
-  padding: 30px;
+  padding: 30px 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .buttonWrapper {
   width: 100%;
-  padding: 20px;
-  text-align: center;
+  padding: 20px 0;
+}
+
+.buttonWrapperLeft {
+  text-align: left;
+}
+
+.buttonWrapperRight {
+  text-align: right;
 }
 
 .button {

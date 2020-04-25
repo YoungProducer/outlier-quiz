@@ -31,7 +31,10 @@ function Answers ({
     return (
       <div
         key={index}
-        className={styles.buttonWrapper}
+        className={classNames(styles.buttonWrapper, {
+          [styles.buttonWrapperRight]: index % 2 !== 0,
+          [styles.buttonWrapperLeft]: index % 2 === 0
+        })}
       >
         <button
           className={classNames(styles.button, {
