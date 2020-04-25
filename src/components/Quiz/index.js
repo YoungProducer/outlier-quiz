@@ -1,7 +1,9 @@
 const React = require('react')
 
 const AnswersBlock = require('./Answers')
+const TopProgressBar = require('./TopProgressBar')
 const parseQuestions = require('../../utils/parse-questions')
+const toPercents = require('../../utils/to-percents')
 const questions = parseQuestions(require('../../questions.json'))
 const styles = require('./styles.module.css')
 const greyStar = require('../../grey-star.svg')
@@ -42,6 +44,12 @@ function Quiz () {
 
   return (
     <div className={styles.root}>
+      <TopProgressBar
+        progress={toPercents(
+          currentAnswerIndex,
+          questions.length
+        )}
+      />
       <div className={styles.innerContainer}>
         <h1 className={styles.questionIndex}>Question {currentAnswerIndex + 1} of {questions.length}</h1>
         <p className={styles.category}>{currentAnswer.category}</p>
