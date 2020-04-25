@@ -12,7 +12,7 @@ const styles = require('./styles.module.css')
 module.exports = Quiz
 
 function Quiz () {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(1)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(18)
   const [amountOfRightAnswers, setAmountOfRightAnswers] = React.useState(0)
   const [isFinished, setIsFinished] = React.useState(false)
 
@@ -21,12 +21,12 @@ function Quiz () {
   }
 
   const currentAnswer = React.useMemo(function () {
-    return questions[currentQuestionIndex - 1]
+    return questions[currentQuestionIndex]
   }, [currentQuestionIndex])
 
   function nextQuestion () {
-    setIsFinished(currentQuestionIndex === questions.length)
-    setCurrentQuestionIndex(currentQuestionIndex === questions.length
+    setIsFinished(currentQuestionIndex === questions.length - 1)
+    setCurrentQuestionIndex(currentQuestionIndex === questions.length - 1
       ? currentQuestionIndex
       : currentQuestionIndex + 1)
   }
@@ -35,8 +35,8 @@ function Quiz () {
     percentsRatio(
       amountOfRightAnswers,
       (isFinished
-        ? currentQuestionIndex
-        : currentQuestionIndex - 1)
+        ? currentQuestionIndex + 1
+        : currentQuestionIndex)
     )
   }, [amountOfRightAnswers, isFinished, currentQuestionIndex])
 
@@ -45,8 +45,8 @@ function Quiz () {
       amountOfRightAnswers +
       questions.length -
       (isFinished
-        ? currentQuestionIndex
-        : currentQuestionIndex - 1),
+        ? currentQuestionIndex + 1
+        : currentQuestionIndex),
       questions.length
     )
   }, [])
