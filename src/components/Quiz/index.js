@@ -36,6 +36,7 @@ function Quiz () {
     return [...Array(3)].map(function (_, index) {
       return (
         <img
+          key={index}
           className={styles.star}
           src={index <= diffLevel ? blackStar : greyStar}
         />
