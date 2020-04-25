@@ -6,6 +6,7 @@ const styles = require('./styles.module.css')
 module.exports = AnswersBlock
 
 function Answers ({
+  isFinished,
   answers,
   correct,
   selectedAnswer,
@@ -13,7 +14,7 @@ function Answers ({
   increaseAmountOfRightAnswers
 }) {
   function handleButtonClick (answer, isUnselectable) {
-    if (!isUnselectable) {
+    if (!isUnselectable && !isFinished) {
       setSelectedAnswer(answer)
     }
   }
@@ -25,8 +26,9 @@ function Answers ({
       selectedAnswer !== '' &&
       !isSelected
     const isUnselectable =
-      selectedAnswer !== '' &&
-      !isSelected
+      (selectedAnswer !== '' &&
+      !isSelected) ||
+      isFinished
 
     return (
       <div
@@ -52,6 +54,7 @@ function Answers ({
 }
 
 function AnswersBlock ({
+  isFinished,
   correct,
   incorrect,
   nextQuestion,
@@ -64,17 +67,21 @@ function AnswersBlock ({
   }, [correct, incorrect])
 
   function handleButtonClick () {
-    if (correct === selectedAnswer) {
+    if (correct === selectedAnswer && !isFinished) {
       increaseAmountOfRightAnswers()
     }
-    setSelectedAnswer('')
-    nextQuestion()
+
+    if (!isFinished) {
+      setSelectedAnswer('')
+      nextQuestion()
+    }
   }
 
   return (
     <div>
       <div className={styles.wrapper}>
         <Answers
+          isFinished={isFinished}
           answers={allAnswers}
           correct={correct}
           selectedAnswer={selectedAnswer}
@@ -82,17 +89,21 @@ function AnswersBlock ({
           increaseAmountOfRightAnswers={increaseAmountOfRightAnswers}
         />
       </div>
-      { selectedAnswer !== '' && (
+      { (selectedAnswer !== '' || isFinished) && (
         <div className={styles.questionStatusWrapper}>
-          <h1 className={styles.correctLabel}>
-            {selectedAnswer === correct ? 'Correct!' : 'Sorry!'}
-          </h1>
-          <button
-            onClick={handleButtonClick}
-            className={styles.nextQuestionButton}
-          >
-            Next Question
-          </button>
+          {!isFinished && (
+            <>
+              <h1 className={styles.correctLabel}>
+                {selectedAnswer === correct ? 'Correct!' : 'Sorry!'}
+              </h1>
+              <button
+                onClick={handleButtonClick}
+                className={styles.nextQuestionButton}
+              >
+                Next Question
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>

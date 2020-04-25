@@ -21,6 +21,7 @@ const diffLevels = {
 function Quiz () {
   const [currentAnswerIndex, setCurrentAnswerIndex] = React.useState(0)
   const [amountOfRightAnswers, setAmountOfRightAnswers] = React.useState(0)
+  const [isFinished, setIsFinished] = React.useState(false)
 
   function increaseAmountOfRightAnswers () {
     setAmountOfRightAnswers(amountOfRightAnswers => amountOfRightAnswers + 1)
@@ -45,6 +46,7 @@ function Quiz () {
   }, [currentAnswer])
 
   function nextQuestion () {
+    setIsFinished(currentAnswerIndex === questions.length - 1)
     setCurrentAnswerIndex(currentAnswerIndex === questions.length - 1
       ? currentAnswerIndex
       : currentAnswerIndex + 1)
@@ -70,6 +72,7 @@ function Quiz () {
           incorrect={currentAnswer.incorrect_answers}
           nextQuestion={nextQuestion}
           increaseAmountOfRightAnswers={increaseAmountOfRightAnswers}
+          isFinished={isFinished}
         />
         <BottomProgressBar
           currentScore={toPercents(amountOfRightAnswers, currentAnswerIndex)}
