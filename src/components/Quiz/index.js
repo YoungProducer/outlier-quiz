@@ -12,7 +12,7 @@ const styles = require('./styles.module.css')
 module.exports = Quiz
 
 function Quiz () {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(18)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0)
   const [amountOfRightAnswers, setAmountOfRightAnswers] = React.useState(0)
   const [isFinished, setIsFinished] = React.useState(false)
 
