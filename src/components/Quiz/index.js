@@ -19,7 +19,7 @@ const diffLevels = {
 }
 
 function Quiz () {
-  const [currentAnswerIndex, setCurrentAnswerIndex] = React.useState(0)
+  const [currentAnswerIndex, setCurrentAnswerIndex] = React.useState(19)
   const [amountOfRightAnswers, setAmountOfRightAnswers] = React.useState(0)
   const [isFinished, setIsFinished] = React.useState(false)
 
@@ -28,7 +28,7 @@ function Quiz () {
   }
 
   const currentAnswer = React.useMemo(() => {
-    return questions[currentAnswerIndex]
+    return questions[currentAnswerIndex - 1]
   }, [currentAnswerIndex])
 
   const difficulty = React.useMemo(() => {
@@ -46,8 +46,8 @@ function Quiz () {
   }, [currentAnswer])
 
   function nextQuestion () {
-    setIsFinished(currentAnswerIndex === questions.length - 1)
-    setCurrentAnswerIndex(currentAnswerIndex === questions.length - 1
+    setIsFinished(currentAnswerIndex === questions.length)
+    setCurrentAnswerIndex(currentAnswerIndex === questions.length
       ? currentAnswerIndex
       : currentAnswerIndex + 1)
   }
@@ -61,7 +61,7 @@ function Quiz () {
         )}
       />
       <div className={styles.innerContainer}>
-        <h1 className={styles.questionIndex}>Question {currentAnswerIndex + 1} of {questions.length}</h1>
+        <h1 className={styles.questionIndex}>Question {currentAnswerIndex} of {questions.length}</h1>
         <p className={styles.category}>{currentAnswer.category}</p>
         <div className={styles.difficultyBlock}>
           {difficulty}
@@ -75,9 +75,18 @@ function Quiz () {
           isFinished={isFinished}
         />
         <BottomProgressBar
-          currentScore={toPercents(amountOfRightAnswers, currentAnswerIndex)}
+          currentScore={toPercents(
+            amountOfRightAnswers,
+            (isFinished
+              ? currentAnswerIndex
+              : currentAnswerIndex - 1)
+          )}
           maxScore={toPercents(
-            amountOfRightAnswers + questions.length - currentAnswerIndex,
+            amountOfRightAnswers +
+            questions.length -
+            (isFinished
+              ? currentAnswerIndex
+              : currentAnswerIndex - 1),
             questions.length
           )}
           rightScore={toPercents(amountOfRightAnswers, questions.length)}
