@@ -5,7 +5,7 @@ const AnswersBlock = require('./Answers')
 const TopProgressBar = require('./TopProgressBar')
 const BottomProgressBar = require('./BottomProgressBar')
 const parseQuestions = require('../../utils/parse-questions')
-const toPercents = require('../../utils/to-percents')
+const percentsRatio = require('../../utils/to-percents')
 const questions = parseQuestions(require('../../questions.json'))
 const styles = require('./styles.module.css')
 
@@ -34,7 +34,7 @@ function Quiz () {
   return (
     <div className={styles.root}>
       <TopProgressBar
-        progress={toPercents(
+        progress={percentsRatio(
           currentQuestionIndex,
           questions.length
         )}
@@ -52,13 +52,13 @@ function Quiz () {
           isFinished={isFinished}
         />
         <BottomProgressBar
-          currentScore={toPercents(
+          currentScore={percentsRatio(
             amountOfRightAnswers,
             (isFinished
               ? currentQuestionIndex
               : currentQuestionIndex - 1)
           )}
-          maxScore={toPercents(
+          maxScore={percentsRatio(
             amountOfRightAnswers +
             questions.length -
             (isFinished
@@ -66,7 +66,7 @@ function Quiz () {
               : currentQuestionIndex - 1),
             questions.length
           )}
-          rightScore={toPercents(amountOfRightAnswers, questions.length)}
+          rightScore={percentsRatio(amountOfRightAnswers, questions.length)}
         />
       </div>
     </div>

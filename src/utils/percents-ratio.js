@@ -1,6 +1,6 @@
-module.exports = toPercents
+module.exports = percentsRatio
 
-function toPercents (currentValue, maxValue) {
+function percentsRatio (currentValue, maxValue) {
   if (currentValue === 0) {
     return 0
   }
