@@ -16,10 +16,6 @@ function Answers ({
     if (!isUnselectable) {
       setSelectedAnswer(answer)
     }
-
-    if (answer === correct) {
-      increaseAmountOfRightAnswers()
-    }
   }
 
   return answers.map(function (answer, index) {
@@ -65,6 +61,9 @@ function AnswersBlock ({
   }, [correct, incorrect])
 
   function handleButtonClick () {
+    if (correct === selectedAnswer) {
+      increaseAmountOfRightAnswers()
+    }
     setSelectedAnswer('')
     nextQuestion()
   }
