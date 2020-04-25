@@ -32,7 +32,7 @@ function Quiz () {
   }
 
   const currentScore = React.useMemo(function () {
-    percentsRatio(
+    return percentsRatio(
       amountOfRightAnswers,
       (isFinished
         ? currentQuestionIndex + 1
