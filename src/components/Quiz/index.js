@@ -37,7 +37,7 @@ function Quiz () {
   }, [currentAnswer])
 
   function nextQuestion () {
-    setCurrentAnswerIndex(currentAnswerIndex === questions.length
+    setCurrentAnswerIndex(currentAnswerIndex === questions.length - 1
       ? currentAnswerIndex
       : currentAnswerIndex + 1)
   }
