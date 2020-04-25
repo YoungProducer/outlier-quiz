@@ -1,6 +1,6 @@
-import React from 'react'
+const React = require('react')
 
-import './App.css'
+require('./App.css')
 
 module.exports = App
 
