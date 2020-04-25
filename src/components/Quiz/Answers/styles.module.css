@@ -20,8 +20,8 @@
   border: 1px solid #000;
   border-radius: 4px;
   transition:
-    color .2s ease-in-out
-    background .2s ease-in-out
+    color .2s ease-in-out,
+    background .2s ease-in-out,
     border .2s ease-in-out;
 }
 
