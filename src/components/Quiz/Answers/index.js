@@ -5,9 +5,12 @@ const styles = require('./styles.module.css')
 
 module.exports = AnswersBlock
 
-function Answers ({ answers, correct }) {
-  const [selectedAnswer, setSelectedAnswer] = React.useState('')
-
+function Answers ({
+  answers,
+  correct,
+  selectedAnswer,
+  setSelectedAnswer
+}) {
   function handleButtonClick (answer, isUnselectable) {
     if (!isUnselectable) {
       setSelectedAnswer(answer)
@@ -46,18 +49,38 @@ function Answers ({ answers, correct }) {
 
 function AnswersBlock ({
   correct,
-  incorrect
+  incorrect,
+  nextQuestion
 }) {
+  const [selectedAnswer, setSelectedAnswer] = React.useState('')
+
   const allAnswers = React.useMemo(() => {
     return [...incorrect, correct]
   }, [correct, incorrect])
 
   return (
-    <div className={styles.wrapper}>
-      <Answers
-        answers={allAnswers}
-        correct={correct}
-      />
+    <div>
+      <div className={styles.wrapper}>
+        <Answers
+          answers={allAnswers}
+          correct={correct}
+          selectedAnswer={selectedAnswer}
+          setSelectedAnswer={setSelectedAnswer}
+        />
+      </div>
+      { selectedAnswer !== '' && (
+        <div className={styles.questionStatusWrapper}>
+          <h1 className={styles.correctLabel}>
+            {selectedAnswer === correct ? 'Correct!' : 'Sorry!'}
+          </h1>
+          <button
+            onClick={nextQuestion}
+            className={styles.nextQuestionButton}
+          >
+            Next Question
+          </button>
+        </div>
+      )}
     </div>
   )
 }

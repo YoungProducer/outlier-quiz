@@ -34,6 +34,12 @@ function Quiz () {
     })
   }, [currentAnswer])
 
+  function nextQuestion () {
+    setCurrentAnswerIndex(currentAnswerIndex === questions.length
+      ? currentAnswerIndex
+      : currentAnswerIndex + 1)
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.innerContainer}>
@@ -46,6 +52,7 @@ function Quiz () {
         <AnswersBlock
           correct={currentAnswer.correct_answer}
           incorrect={currentAnswer.incorrect_answers}
+          nextQuestion={nextQuestion}
         />
       </div>
     </div>
