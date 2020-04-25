@@ -49,7 +49,7 @@ function Quiz () {
         : currentQuestionIndex),
       questions.length
     )
-  }, [])
+  }, [amountOfRightAnswers, isFinished, currentQuestionIndex])
 
   const rightScore = React.useMemo(function () {
     return percentsRatio(amountOfRightAnswers, questions.length)
