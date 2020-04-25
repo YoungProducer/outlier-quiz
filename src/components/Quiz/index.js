@@ -36,9 +36,11 @@ function Quiz () {
   return (
     <div className={styles.root}>
       <div className={styles.innerContainer}>
-        <h1>Question {currentAnswerIndex + 1} of {questions.length}</h1>
+        <h1 className={styles.questionIndex}>Question {currentAnswerIndex + 1} of {questions.length}</h1>
         <p className={styles.category}>{currentAnswer.category}</p>
-        {difficulty}
+        <div className={styles.difficultyBlock}>
+          {difficulty}
+        </div>
         <p className={styles.question}>{currentAnswer.question}</p>
       </div>
     </div>

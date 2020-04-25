@@ -8,15 +8,26 @@
   height: 100%;
 }
 
+.questionIndex {
+  padding: 4px;
+}
+
 .category {
   color: #959595;
+  padding: 4px;
 }
 
 .question {
   font-size: 1.2rem;
+  margin-top: 30px;
+  padding: 4px;
 }
 
 .star {
   width: 15px;
   height: 15px;
+}
+
+.difficultyBlock {
+  padding: 4px;
 }
