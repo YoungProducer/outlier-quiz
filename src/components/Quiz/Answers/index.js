@@ -58,6 +58,11 @@ function AnswersBlock ({
     return [...incorrect, correct]
   }, [correct, incorrect])
 
+  function handleButtonClick () {
+    setSelectedAnswer('')
+    nextQuestion()
+  }
+
   return (
     <div>
       <div className={styles.wrapper}>
@@ -74,7 +79,7 @@ function AnswersBlock ({
             {selectedAnswer === correct ? 'Correct!' : 'Sorry!'}
           </h1>
           <button
-            onClick={nextQuestion}
+            onClick={handleButtonClick}
             className={styles.nextQuestionButton}
           >
             Next Question
