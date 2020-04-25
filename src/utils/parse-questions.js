@@ -10,6 +10,23 @@ function parseQuestions (questions) {
     return Object
       .entries(question)
       .reduce(function (acc, [key, value]) {
+        if (typeof value === 'object') {
+          const newValue =
+            Object
+              .entries(value)
+              .reduce(function (subacc, [subkey, subvalue]) {
+                return {
+                  ...subacc,
+                  [subkey]: decodeURIComponent(subvalue)
+                }
+              })
+
+          return {
+            ...acc,
+            [key]: newValue
+          }
+        }
+
         return {
           ...acc,
           [key]: decodeURIComponent(value)
