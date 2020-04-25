@@ -5,7 +5,7 @@ const AnswersBlock = require('./Answers')
 const TopProgressBar = require('./TopProgressBar')
 const BottomProgressBar = require('./BottomProgressBar')
 const parseQuestions = require('../../utils/parse-questions')
-const percentsRatio = require('../../utils/to-percents')
+const percentsRatio = require('../../utils/percents-ratio')
 const questions = parseQuestions(require('../../questions.json'))
 const styles = require('./styles.module.css')
 
@@ -31,6 +31,30 @@ function Quiz () {
       : currentQuestionIndex + 1)
   }
 
+  const currentScore = React.useMemo(function () {
+    percentsRatio(
+      amountOfRightAnswers,
+      (isFinished
+        ? currentQuestionIndex
+        : currentQuestionIndex - 1)
+    )
+  }, [amountOfRightAnswers, isFinished, currentQuestionIndex])
+
+  const maxScore = React.useMemo(function () {
+    return percentsRatio(
+      amountOfRightAnswers +
+      questions.length -
+      (isFinished
+        ? currentQuestionIndex
+        : currentQuestionIndex - 1),
+      questions.length
+    )
+  }, [])
+
+  const rightScore = React.useMemo(function () {
+    return percentsRatio(amountOfRightAnswers, questions.length)
+  }, [amountOfRightAnswers])
+
   return (
     <div className={styles.root}>
       <TopProgressBar
@@ -52,21 +76,9 @@ function Quiz () {
           isFinished={isFinished}
         />
         <BottomProgressBar
-          currentScore={percentsRatio(
-            amountOfRightAnswers,
-            (isFinished
-              ? currentQuestionIndex
-              : currentQuestionIndex - 1)
-          )}
-          maxScore={percentsRatio(
-            amountOfRightAnswers +
-            questions.length -
-            (isFinished
-              ? currentQuestionIndex
-              : currentQuestionIndex - 1),
-            questions.length
-          )}
-          rightScore={percentsRatio(amountOfRightAnswers, questions.length)}
+          currentScore={currentScore}
+          maxScore={maxScore}
+          rightScore={rightScore}
         />
       </div>
     </div>
