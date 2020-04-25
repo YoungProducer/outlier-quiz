@@ -9,11 +9,16 @@ function Answers ({
   answers,
   correct,
   selectedAnswer,
-  setSelectedAnswer
+  setSelectedAnswer,
+  increaseAmountOfRightAnswers
 }) {
   function handleButtonClick (answer, isUnselectable) {
     if (!isUnselectable) {
       setSelectedAnswer(answer)
+    }
+
+    if (answer === correct) {
+      increaseAmountOfRightAnswers()
     }
   }
 
@@ -50,7 +55,8 @@ function Answers ({
 function AnswersBlock ({
   correct,
   incorrect,
-  nextQuestion
+  nextQuestion,
+  increaseAmountOfRightAnswers
 }) {
   const [selectedAnswer, setSelectedAnswer] = React.useState('')
 
@@ -71,6 +77,7 @@ function AnswersBlock ({
           correct={correct}
           selectedAnswer={selectedAnswer}
           setSelectedAnswer={setSelectedAnswer}
+          increaseAmountOfRightAnswers={increaseAmountOfRightAnswers}
         />
       </div>
       { selectedAnswer !== '' && (

@@ -19,6 +19,12 @@ const diffLevels = {
 
 function Quiz () {
   const [currentAnswerIndex, setCurrentAnswerIndex] = React.useState(0)
+  const [amountOfRightAnswers, setAmountOfRightAnswers] = React.useState(0)
+
+  function increaseAmountOfRightAnswers () {
+    setAmountOfRightAnswers(amountOfRightAnswers => amountOfRightAnswers + 1)
+  }
+
   const currentAnswer = React.useMemo(() => {
     return questions[currentAnswerIndex]
   }, [currentAnswerIndex])
@@ -61,6 +67,7 @@ function Quiz () {
           correct={currentAnswer.correct_answer}
           incorrect={currentAnswer.incorrect_answers}
           nextQuestion={nextQuestion}
+          increaseAmountOfRightAnswers={increaseAmountOfRightAnswers}
         />
       </div>
     </div>
