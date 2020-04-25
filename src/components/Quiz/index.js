@@ -1,5 +1,6 @@
 const React = require('react')
 
+const Difficulty = require('./Difficulty')
 const AnswersBlock = require('./Answers')
 const TopProgressBar = require('./TopProgressBar')
 const BottomProgressBar = require('./BottomProgressBar')
@@ -7,16 +8,8 @@ const parseQuestions = require('../../utils/parse-questions')
 const toPercents = require('../../utils/to-percents')
 const questions = parseQuestions(require('../../questions.json'))
 const styles = require('./styles.module.css')
-const greyStar = require('../../grey-star.svg')
-const blackStar = require('../../black-star.svg')
 
 module.exports = Quiz
-
-const diffLevels = {
-  easy: 0,
-  medium: 1,
-  hard: 2
-}
 
 function Quiz () {
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(1)
@@ -27,23 +20,9 @@ function Quiz () {
     setAmountOfRightAnswers(amountOfRightAnswers => amountOfRightAnswers + 1)
   }
 
-  const currentAnswer = React.useMemo(() => {
+  const currentAnswer = React.useMemo(function () {
     return questions[currentQuestionIndex - 1]
   }, [currentQuestionIndex])
-
-  const difficulty = React.useMemo(() => {
-    const diffLevel = diffLevels[currentAnswer.difficulty]
-
-    return [...Array(3)].map(function (_, index) {
-      return (
-        <img
-          key={index}
-          className={styles.star}
-          src={index <= diffLevel ? blackStar : greyStar}
-        />
-      )
-    })
-  }, [currentAnswer])
 
   function nextQuestion () {
     setIsFinished(currentQuestionIndex === questions.length)
@@ -63,9 +42,7 @@ function Quiz () {
       <div className={styles.innerContainer}>
         <h1 className={styles.questionIndex}>Question {currentQuestionIndex} of {questions.length}</h1>
         <p className={styles.category}>{currentAnswer.category}</p>
-        <div className={styles.difficultyBlock}>
-          {difficulty}
-        </div>
+        <Difficulty difficulty={currentAnswer.difficulty}/>
         <p className={styles.question}>{currentAnswer.question}</p>
         <AnswersBlock
           correct={currentAnswer.correct_answer}
