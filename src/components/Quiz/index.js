@@ -1,5 +1,6 @@
 const React = require('react')
 
+const Answers = require('./Answers')
 const parseQuestions = require('../../utils/parse-questions')
 const questions = parseQuestions(require('../../questions.json'))
 const styles = require('./styles.module.css')
@@ -42,6 +43,10 @@ function Quiz () {
           {difficulty}
         </div>
         <p className={styles.question}>{currentAnswer.question}</p>
+        <Answers
+          correct={currentAnswer.correct_answer}
+          incorrect={currentAnswer.incorrect_answers}
+        />
       </div>
     </div>
   )

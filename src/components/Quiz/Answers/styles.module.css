@@ -1,0 +1,44 @@
+.wrapper {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.buttonWrapper {
+  width: 100%;
+  padding: 20px;
+}
+
+.button {
+  cursor: pointer;
+  min-width: 200px;
+  outline: none;
+  height: 30px;
+  text-align: center;
+  color: #000;
+  background-color: #959595;
+  border: 1px solid #000;
+  border-radius: 4px;
+  transition:
+    color .2s ease-in-out
+    background .2s ease-in-out
+    border .2s ease-in-out;
+}
+
+.buttonSelected {
+  color: #fff;
+  background-color: #000;
+}
+
+.buttonUnselectable {
+  cursor: default;
+  color: #959595;
+  border-color: #959595;
+  background-color: #d1d1d1;
+}
+
+.buttonCorrect {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+}
