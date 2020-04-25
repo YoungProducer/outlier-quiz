@@ -10,8 +10,7 @@ function Answers ({
   answers,
   correct,
   selectedAnswer,
-  setSelectedAnswer,
-  increaseAmountOfRightAnswers
+  setSelectedAnswer
 }) {
   function handleButtonClick (answer, isUnselectable) {
     if (!isUnselectable && !isFinished) {
