@@ -76,6 +76,7 @@ function Quiz () {
             amountOfRightAnswers + questions.length - currentAnswerIndex,
             questions.length
           )}
+          rightScore={toPercents(amountOfRightAnswers, questions.length)}
         />
       </div>
     </div>
