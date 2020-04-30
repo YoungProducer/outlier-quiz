@@ -1,6 +1,7 @@
 const React = require('react')
 const classNames = require('classnames')
 
+const shuffleArray = require('../../../utils/shuffle-array')
 const styles = require('./styles.module.css')
 
 module.exports = AnswersBlock
@@ -62,7 +63,7 @@ function AnswersBlock ({
   const [selectedAnswer, setSelectedAnswer] = React.useState('')
 
   const allAnswers = React.useMemo(() => {
-    return [...incorrect, correct]
+    return shuffleArray([...incorrect, correct])
   }, [correct, incorrect])
 
   function handleButtonClick () {
