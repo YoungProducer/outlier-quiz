@@ -66,7 +66,7 @@ function Quiz () {
       <div className={styles.innerContainer}>
         <h1 className={styles.questionIndex}>Question {currentQuestionIndex + 1} of {questions.length}</h1>
         <p className={styles.category}>{currentAnswer.category}</p>
-        <Difficulty difficulty={currentAnswer.difficulty}/>
+        <Difficulty difficulty={currentAnswer.difficulty} />
         <p className={styles.question}>{currentAnswer.question}</p>
         <AnswersBlock
           correct={currentAnswer.correct_answer}
